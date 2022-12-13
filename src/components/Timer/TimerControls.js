@@ -1,4 +1,5 @@
 import React from "react";
+import "./TimerControls.css";
 
 const TimerControls = (props) => {
   return (
