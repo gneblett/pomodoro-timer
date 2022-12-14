@@ -3,75 +3,53 @@ import TimerDisplay from "./TimerDisplay";
 import TimerControls from "./TimerControls";
 import "./Timer.css";
 
-const Timer = () => {
-  const Ref = useRef(null);
-
+const Timer = (props) => {
   // The state for the timer
-  const [timeRemaining, setTimeRemaining] = useState("00:00:00");
+  const [timeRemaining, setTimeRemaining] = useState(10000);
+  const [currentInterval, setCurrentInterval] = useState(null);
+  const [isActive, setIsActive] = useState(false);
 
-  const getTimeRemaining = (e) => {
-    const total = Date.parse(e) - Date.parse(new Date());
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
-    return {
-      total,
-      hours,
-      minutes,
-      seconds,
-    };
+  const tick = () => {
+    setTimeRemaining((time) => {
+      if (time > 0) {
+        return time - 1000;
+      } else {
+        stopTimer();
+
+        return time;
+      }
+    });
   };
 
-  const formatTime = (time) => {
-    return time > 9 ? time : "0" + time;
+  const startTimer = () => {
+    if (!isActive && timeRemaining > 0) setIsActive(true);
+  };
+  const stopTimer = () => {
+    clearInterval(currentInterval);
+    setIsActive(false);
+    setCurrentInterval(null);
   };
 
-  const startTimer = (e) => {
-    let { total, hours, minutes, seconds } = getTimeRemaining(e);
-    if (total >= 0) {
-      // update the timer
-      // check if less than 10 then we need to append 0
-      setTimeRemaining(
-        formatTime(hours) +
-          ":" +
-          formatTime(minutes) +
-          ":" +
-          formatTime(seconds)
-      );
+  const pauseTimer = () => {
+    currentInterval ? stopTimer() : startTimer();
+  };
+
+  useEffect(() => {
+    if (isActive) {
+      setCurrentInterval(setInterval(tick, 1000));
     }
-  };
-
-  const clearTimer = (e) => {
-    setTimeRemaining("00:01:00");
-
-    // Clears interval if value is set
-    if (Ref.current) {
-      clearInterval(Ref.current);
-    }
-
-    const id = setInterval(() => {
-      startTimer(e);
-    }, 1000);
-    Ref.current = id;
-  };
-
-  const getDeadTime = () => {
-    let deadline = new Date();
-
-    // This is where you need to adjust if
-    // you intend to add more time
-    deadline.setSeconds(deadline.getSeconds() + 60);
-    return deadline;
-  };
-
-  const onClickReset = () => {
-    clearTimer(getDeadTime());
-  };
+    return () => clearInterval(currentInterval);
+  }, [isActive]);
 
   return (
     <div className="timer">
-      <TimerDisplay time={timeRemaining} />
-      <TimerControls reset={onClickReset} />
+      <TimerDisplay roundName={props.currentRound.name} time={timeRemaining} />
+      <TimerControls
+        start={startTimer}
+        stop={stopTimer}
+        pause={pauseTimer}
+        active={isActive}
+      />
     </div>
   );
 };
