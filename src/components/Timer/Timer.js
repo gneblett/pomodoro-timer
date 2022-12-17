@@ -1,11 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import TimerDisplay from "./TimerDisplay";
 import TimerControls from "./TimerControls";
 import "./Timer.css";
 
 const Timer = (props) => {
   // The state for the timer
-  const [timeRemaining, setTimeRemaining] = useState(10000);
+  const [timeRemaining, setTimeRemaining] = useState(
+    props.userSettings[props.currentMode]
+  );
   const [currentInterval, setCurrentInterval] = useState(null);
   const [isActive, setIsActive] = useState(false);
 
@@ -15,15 +17,18 @@ const Timer = (props) => {
         return time - 1000;
       } else {
         stopTimer();
-
         return time;
       }
     });
   };
 
   const startTimer = () => {
-    if (!isActive && timeRemaining > 0) setIsActive(true);
+    if (!isActive) {
+      setIsActive(true);
+      setTimeRemaining(props.userSettings[props.currentMode]);
+    }
   };
+
   const stopTimer = () => {
     clearInterval(currentInterval);
     setIsActive(false);
@@ -43,7 +48,7 @@ const Timer = (props) => {
 
   return (
     <div className="timer">
-      <TimerDisplay roundName={props.currentRound.name} time={timeRemaining} />
+      <TimerDisplay time={timeRemaining} mode={props.currentMode} />
       <TimerControls
         start={startTimer}
         stop={stopTimer}

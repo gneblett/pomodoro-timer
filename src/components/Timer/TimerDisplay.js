@@ -8,10 +8,9 @@ const TimerDisplay = (props) => {
   const seconds = Math.floor((props.time / 1000) % 60);
   const minutes = Math.floor((props.time / 1000 / 60) % 60);
   const hours = Math.floor((props.time / 1000 / 60 / 60) % 24);
-
   return (
     <div>
-      <h1>{props.roundName}</h1>
+      <h1>{props.mode}</h1>
       <h2>
         {formatTime(hours) +
           ":" +
