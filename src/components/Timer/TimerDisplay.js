@@ -10,7 +10,7 @@ const TimerDisplay = (props) => {
   const hours = Math.floor((props.time / 1000 / 60 / 60) % 24);
   return (
     <div>
-      <h1>{props.mode}</h1>
+      <h1>{props.currentMode}</h1>
       <h2>
         {formatTime(hours) +
           ":" +

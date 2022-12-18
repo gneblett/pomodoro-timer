@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import TimerDisplay from "./TimerDisplay";
 import TimerControls from "./TimerControls";
+import ModeControls from "../Modes/ModeControls";
 import "./Timer.css";
 
 const Timer = (props) => {
-  // The state for the timer
-  const [timeRemaining, setTimeRemaining] = useState(
-    props.userSettings[props.currentMode]
-  );
   const [currentInterval, setCurrentInterval] = useState(null);
   const [isActive, setIsActive] = useState(false);
+  const [mode, setMode] = useState("focus");
+  const [timeRemaining, setTimeRemaining] = useState(props.userSettings[mode]);
 
   const tick = () => {
     setTimeRemaining((time) => {
@@ -22,10 +21,16 @@ const Timer = (props) => {
     });
   };
 
+  const changeModeHandler = (newMode) => {
+    setMode(newMode);
+    stopTimer();
+    setTimeRemaining(props.userSettings[newMode]);
+  };
+
   const startTimer = () => {
     if (!isActive) {
       setIsActive(true);
-      setTimeRemaining(props.userSettings[props.currentMode]);
+      setTimeRemaining(props.userSettings[mode]);
     }
   };
 
@@ -48,7 +53,8 @@ const Timer = (props) => {
 
   return (
     <div className="timer">
-      <TimerDisplay time={timeRemaining} mode={props.currentMode} />
+      <ModeControls onChangeMode={changeModeHandler} />
+      <TimerDisplay time={timeRemaining} currentMode={mode} />
       <TimerControls
         start={startTimer}
         stop={stopTimer}
