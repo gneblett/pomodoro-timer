@@ -1,17 +1,18 @@
 import React from "react";
 import Timer from "./components/Timer/Timer";
+import Card from "./components/UI/Card"
 
 const App = () => {
   const settings = {
-    focus: 25 * 60 * 1000,
-    shortBreak: 5 * 60 * 1000,
-    longBreak: 15 * 60 * 1000,
+    "Focus": 25 * 60 * 1000,
+    "Short Break": 5 * 60 * 1000,
+    "Long Break": 15 * 60 * 1000,
   };
 
   return (
-    <div className="app">
+    <Card className="app">
       <Timer userSettings={settings} />
-    </div>
+    </Card>
   );
 };
 

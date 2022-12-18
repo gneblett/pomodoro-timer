@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import TimerDisplay from "./TimerDisplay";
 import TimerControls from "./TimerControls";
 import ModeControls from "../Modes/ModeControls";
+import Card from "../UI/Card";
 import "./Timer.css";
 
 const Timer = (props) => {
   const [currentInterval, setCurrentInterval] = useState(null);
   const [isActive, setIsActive] = useState(false);
-  const [mode, setMode] = useState("focus");
+  const [mode, setMode] = useState("Focus");
   const [timeRemaining, setTimeRemaining] = useState(props.userSettings[mode]);
 
   const tick = () => {

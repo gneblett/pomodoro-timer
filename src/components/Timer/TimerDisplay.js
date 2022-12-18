@@ -1,4 +1,5 @@
 import React from "react";
+import "./TimerDisplay.css";
 
 const TimerDisplay = (props) => {
   const formatTime = (time) => {
@@ -10,14 +11,14 @@ const TimerDisplay = (props) => {
   const hours = Math.floor((props.time / 1000 / 60 / 60) % 24);
   return (
     <div>
-      <h1>{props.currentMode}</h1>
-      <h2>
+      <h2>{props.currentMode}</h2>
+      <h1>
         {formatTime(hours) +
           ":" +
           formatTime(minutes) +
           ":" +
           formatTime(seconds)}
-      </h2>
+      </h1>
     </div>
   );
 };
