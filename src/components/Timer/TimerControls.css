@@ -2,17 +2,15 @@
   display: inline-block;
   outline: none;
   cursor: pointer;
-  margin: 10px;
-  border-radius: 3px;
-  padding: 2px 16px;
+  font-size: 0.5em;
   height: 60px;
-  min-width: 120px;
+  min-width: 180px;
   min-height: 60px;
   border: none;
-  color: #fffffcff;
-  background-color: #0090c1ff;
+  color: #f1faeeff;
+  background-color: #0c6291;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 .button:hover {
-  background-color: #38aeccff;
+  background-color: #1484c0;
 }

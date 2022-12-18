@@ -1,4 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+/* CSS HEX 
+--tomato: #ff6347ff;
+--baby-powder: #fbfef9ff;
+--black: #000500ff;
+*/
 
 * {
   margin: 0;
@@ -7,15 +13,14 @@
 }
 
 html {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
   height: 100vh;
   width: auto;
   text-align: center;
-  font-size: 5em;
-  color: #0c1618ff;
-  background-color: #ff6347;
+  font-size: 3em;
+  color: #000500ff;
   transition: all 0.2s ease;
 }

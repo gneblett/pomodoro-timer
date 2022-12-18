@@ -1,5 +1,4 @@
 import React from "react";
-import { MdOutlineRestartAlt } from "react-icons/md";
 import { BsPlayFill } from "react-icons/bs";
 import { BsFillPauseFill } from "react-icons/bs";
 
@@ -9,12 +8,12 @@ const TimerControls = (props) => {
   return (
     <div className="timeControls">
       {!props.active ? (
-        <button className="button">
-          <BsPlayFill size={40} onClick={props.start} />
+        <button className="button" onClick={props.start}>
+          <BsPlayFill size={40} />
         </button>
       ) : (
-        <button className="button">
-          <BsFillPauseFill size={40} onClick={props.pause} />
+        <button className="button" onClick={props.pause}>
+          <BsFillPauseFill size={40} />
         </button>
       )}
     </div>
