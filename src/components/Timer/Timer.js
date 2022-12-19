@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import TimerDisplay from "./TimerDisplay";
 import TimerControls from "./TimerControls";
 import ModeControls from "../Modes/ModeControls";
-import Card from "../UI/Card";
 import "./Timer.css";
 
 const Timer = (props) => {
@@ -31,11 +30,13 @@ const Timer = (props) => {
   const startTimer = () => {
     if (!isActive) {
       setIsActive(true);
-      setTimeRemaining(props.userSettings[mode]);
+    if (timeRemaining === 0) {
+      
+    }
     }
   };
 
-  const stopTimer = () => {
+  const stopTimer = () => { 
     clearInterval(currentInterval);
     setIsActive(false);
     setCurrentInterval(null);
